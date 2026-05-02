@@ -1,0 +1,11 @@
+id,name,role,salary,hire_date,company,department
+101,Alice k Smith,Frontend Dev,85000.0,2023-01-15,TechNova,
+102,Bob k Jones,Backend Dev,92000.0,2022-11-01,TechNova,
+103,Charlie k Brown,Unassigned,78000.0,,TechNova,
+103,Charlie Brown Duplicate,Data Intern,,,TechNova,
+,,QA Engineer,,,TechNova,
+106,Dana White,DevOps,105000.0,,TechNova,
+107,Eve Black,Unassigned,,,TechNova,
+108,Frank Green,Unassigned,,,TechNova,
+109,Grace Hopper,Architect,130000.0,2020-07-01,TechNova,
+110,Henry Ford,Manager,115000.0,2019-05-10,TechNova,

@@ -1,0 +1,100 @@
+{
+  "company": " TechNova  ",
+  "department": null,
+  "employees": [
+    {
+      "id": 101,
+      "name": "Alice k Smith",
+      "details": {
+        "role": "Frontend Dev",
+        "salary": 85000,
+        "hire_date": "2023-01-15"
+      }
+    },
+    {
+      "id": "102",
+      "name": " Bob k Jones ",
+      "details": {
+        "role": "Backend Dev",
+        "salary": "92,000",
+        "hire_date": "11/01/2022"
+      }
+    },
+    {
+      "id": 103,
+      "name": "Charlie k Brown",
+      "details": {
+        "role": null,
+        "salary": 78000,
+        "hire_date": "2024-02-30"
+      }
+    },
+    {
+      "id": 103,
+      "name": "Charlie Brown Duplicate",
+      "details": {
+        "role": "Data Intern",
+        "salary": "",
+        "hire_date": ""
+      }
+    },
+    {
+      "id": null,
+      "name": null,
+      "details": {
+        "role": "  QA Engineer",
+        "salary": -5000,
+        "hire_date": "unknown",
+        "location": "Remote"
+      }
+    },
+    {
+      "employee_id": 106,
+      "full_name": "Dana White",
+      "Details": {
+        "Role": "DevOps",
+        "Salary": 105000,
+        "HireDate": "2021-09-12"
+      }
+    },
+    {
+      "id": 107,
+      "name": "Eve Black",
+      "details": null
+    },
+    {
+      "id": 108,
+      "name": "Frank Green"
+    },
+    {
+      "id": 109,
+      "name": "Grace Hopper",
+      "details": {
+        "role": [
+          "Architect"
+        ],
+        "salary": 130000,
+        "hire_date": "2020/07/01"
+      },
+      "department": "R&D"
+    },
+    {
+      "id": 110,
+      "name": "Henry Ford",
+      "details": {
+        "role": "Manager",
+        "salary": 115000,
+        "hire_date": "2019-05-10T09:30:00Z"
+      },
+      "legacy_notes": {
+        "source_system": "HR_v1",
+        "record_status": "migrated"
+      }
+    }
+  ],
+  "extra_metadata": {
+    "ingested_at": "2026-04-30",
+    "source": "legacy_hr_export_v3",
+    "row_count_claimed": "twelve"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "source_records": 10,
+  "processed_records": 10,
+  "rows_missing_id": 1,
+  "rows_missing_name": 1,
+  "rows_unassigned_role": 3,
+  "rows_missing_salary": 4,
+  "rows_missing_hire_date": 6,
+  "rows_with_duplicate_id": 2
+}
