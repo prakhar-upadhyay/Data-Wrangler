@@ -1,6 +1,6 @@
 # Legacy Data Wrangler
 
-[![Docker Build CI](https://github.com/[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME]/actions/workflows/docker-build.yml/badge.svg)](https://github.com/[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME]/actions/workflows/docker-build.yml)
+[![Docker Build CI](https://github.com/prakhar-upadhyay/Data-Wrangler/actions/workflows/docker-build.yml/badge.svg)](https://github.com/prakhar-upadhyay/Data-Wrangler/actions/workflows/docker-build.yml)
 
 ## Overview
 The Legacy Data Wrangler is a robust, containerized ETL (Extract, Transform, Load) pipeline built in Python. It is designed to ingest highly nested, poorly formatted JSON data from legacy systems, normalize the schema, handle inconsistencies (such as missing values and mixed data types), and output a clean, standardized CSV ready for modern accounting software integration.
