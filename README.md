@@ -3,26 +3,19 @@
 [![Docker Build CI](https://github.com/[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME]/actions/workflows/docker-build.yml/badge.svg)](https://github.com/[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME]/actions/workflows/docker-build.yml)
 
 ## Overview
-The Legacy Data Wrangler is a robust, containerized ETL (Extract, Transform, Load) pipeline built in Python. It is designed to ingest highly nested, poorly formatted JSON data from legacy systems, normalize the schema, and export a clean, standardized CSV ready for modern accounting software integration. 
-
-Built with defensive programming principles, the pipeline gracefully handles schema inconsistencies, missing critical fields, and variable data types without crashing.
+The Legacy Data Wrangler is a robust, containerized ETL (Extract, Transform, Load) pipeline built in Python. It is designed to ingest highly nested, poorly formatted JSON data from legacy systems, normalize the schema, handle inconsistencies (such as missing values and mixed data types), and output a clean, standardized CSV ready for modern accounting software integration.
 
 ## Architecture & Technologies
-* **Language:** Python 3.12 (with Type Hints and Docstrings)
-* **Data Manipulation:** `pandas` for high-performance JSON flattening.
-* **Containerization:** Docker (`python:3.12-slim` base image) for environment parity.
+* **Language:** Python 3.x
+* **Data Manipulation:** `pandas` for high-performance JSON flattening and dataframe transformations.
+* **Containerization:** Docker (ensuring environment parity across all client deployments).
 * **CI/CD:** GitHub Actions for automated Docker builds.
-* **Design Pattern:** Modular pipeline with a thin orchestration `main()` function and distinct functional stages (`load_payload`, `normalize_employee`, `build_dataframe`, `write_outputs`).
 
 ## Key Features
-* **Defensive Data Parsing:** Implements case-insensitive key lookups (e.g., `details` vs `Details`) and fallback mapping for renamed keys (e.g., mapping both `id` and `employee_id` to `id`).
-* **Smart Type Coercion & Cleansing:**
-  * **Roles:** Extracts the first element from unexpected lists, trims whitespace, and assigns "Unassigned" to null/missing values.
-  * **Salaries:** Strips commas from strings and coerces invalid or negative values to null.
-  * **Dates:** Enforces strict coercion to `YYYY-MM-DD` format, safely nulling out unparseable dates.
-* **Dynamic Normalization:** Automatically flattens deeply nested JSON dictionaries into a flat, stable tabular format.
-* **Production Logging:** Utilizes Python's structured `logging` module to generate timestamped server logs tracking extraction stages, input/output sources, and fatal error aborts.
-* **Health Reporting:** Outputs a dedicated `cleaning_report.json` containing metrics on processed records, duplicate IDs, and missing data points.
+* **Dynamic Normalization:** Automatically flattens deeply nested JSON dictionaries into a flat, tabular format.
+* **Data Imputation:** Gracefully handles missing keys (e.g., dynamically assigning 'Unassigned' to null roles).
+* **Production Logging:** Generates standardized timestamped server logs detailing extraction stages, input/output sources, and error tracking.
+* **Health Reporting:** Outputs a dedicated `cleaning_report.json` containing metrics on processed records and missing data points.
 
 ---
 
@@ -36,27 +29,33 @@ To run this pipeline, you do not need Python installed on your host machine. You
    ```bash
    git clone [https://github.com/](https://github.com/)[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME].git
    cd [YOUR_REPO_NAME]
+   ```
 
 2. **Build the Docker container:**
    ```bash
-   docker build -t data-wrangler .
-
+   docker build -t data-wrangler-app .
+   ```
 
 ## Usage
-The pipeline is designed to be executed via a simple Docker command. By default, the container will look for a data.json file in the working directory and execute the wrangling script.
+The pipeline is designed to be executed via a simple Docker command. By default, the container will look for a `data.json` file in the working directory and execute the wrangling script.
 
-Run the pipeline:
-
+**Run the pipeline:**
 ```bash
 docker run -v "$(pwd):/app" data-wrangler-app
-(Note: The -v "$(pwd):/app" flag mounts your current directory to the container, allowing the script to read your local data.json and write the final CSV back to your machine.)
+```
+*(Note: The `-v "$(pwd):/app"` flag mounts your current directory to the container, allowing the script to read your local `data.json` and write the final CSV back to your machine.)*
 
 ## Expected Outputs
 
-1. Upon successful execution, the pipeline generates the following in your directory:
+Upon successful execution, the pipeline generates the following in your directory:
 
-2. cleaned_data.csv: The fully flattened and standardized data file, ready for downstream use.
+1.  **`cleaned_data.csv`**: The fully flattened and standardized data file, ready for downstream use.
+2.  **`cleaning_report.json`**: A diagnostic file containing metrics such as total rows processed and counts of missing identifiers.
+3.  **Terminal Logs**: Standardized `INFO` logs tracking the job's lifecycle in real-time.
 
-3. cleaning_report.json: A diagnostic file containing metrics such as total rows processed and counts of missing identifiers.
-
-Terminal Logs: Standardized INFO logs tracking the job's lifecycle in real-time.
+```text
+2026-05-02 12:00:00,000 | INFO | data_wrangler | Starting data wrangling job
+2026-05-02 12:00:00,005 | INFO | data_wrangler | Input: data.json
+2026-05-02 12:00:00,010 | INFO | data_wrangler | Output: cleaned_data.csv
+2026-05-02 12:00:00,500 | INFO | data_wrangler | Data wrangling completed successfully.
+```
